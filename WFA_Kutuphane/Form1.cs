@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 
@@ -39,7 +40,7 @@ namespace WFA_Kutuphane
                 else if (item is NumericUpDown)
                 {
                     NumericUpDown nmb = (NumericUpDown)item;
-                    if (nmb.Value==0)
+                    if (nmb.Value == 0)
                     {
                         errorProvider1.SetError(nmb, "Alan boş bırakılamaz!");
                     }
@@ -52,24 +53,50 @@ namespace WFA_Kutuphane
 
             }
         }
+        void clearLst()
+        {
+            lstKitaplar.Items.Clear();
+        }
 
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
-            //if (!String.IsNullOrEmpty(txtKitapAdi.Text) && !String.IsNullOrEmpty(txtYazarAdi.Text) && nmrSayfaSayisi.Value != 0)
-            //{
-
-            //}
-            //else if (String.IsNullOrEmpty(txtKitapAdi.Text) && !String.IsNullOrEmpty(txtYazarAdi.Text) && nmrSayfaSayisi.Value != 0)
-            //{
-            //    errorProvider1.SetError(txtKitapAdi, "Kitap adı boş bırakılamaz!");
-            //}
-            //else if (!String.IsNullOrEmpty(txtKitapAdi.Text) && String.IsNullOrEmpty(txtYazarAdi.Text) && nmrSayfaSayisi.Value != 0)
-            //{
-            //    errorProvider1.SetError(txtYazarAdi, "Yazar adı boş bırakılamaz!");
-            //}
+            Kutuphane kutuphane = new Kutuphane();//instance aldık
+            kutuphane.KitapAdi = txtKitapAdi.Text;
+            kutuphane.YazarAdi = txtYazarAdi.Text;
+            kutuphane.YayinEvi = txtYayinEvi.Text;
+            kutuphane.BaskiSayi = Convert.ToString(nmrBaskiSayisi.Value);
+            kutuphane.SayfaSayi = Convert.ToString(nmrSayfaSayisi.Value);
+            kutuphane.BasimYili = dtBasimYili.Value;
+            kutuphane.IsbnNo = int.Parse(txtISBNNo.Text);
             Kontrol(this.Controls);
 
+            lstKitaplar.Items.Add(kutuphane.KitapAdi + "  " + kutuphane.YazarAdi + "  " + kutuphane.BasimYili + "  " + kutuphane.BaskiSayi);
+            MetroMessageBox.Show(this, "Yeni Kitap Eklediniz...");
+           
         }
 
+        private void tsmSil_Click(object sender, EventArgs e)
+        {
+            DialogResult dio = new DialogResult();
+
+
+            if (lstKitaplar.SelectedItems.Count == 0)
+            {
+                MetroMessageBox.Show(this, "Lütfen Bir Kayıt Seçiniz...");
+            }
+
+            else if (lstKitaplar.SelectedItems.Count > 0)
+            {
+
+                dio = MetroMessageBox.Show(this, "Kayıt silinecek", "Sil", MessageBoxButtons.YesNo);
+                if (dio == DialogResult.Yes)
+                {
+                    lstKitaplar.Items.RemoveAt(lstKitaplar.SelectedIndex);
+                    MetroMessageBox.Show(this, "Kitap Sildin...");
+                }
+
+            }
+
+        }
     }
 }

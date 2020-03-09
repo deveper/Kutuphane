@@ -70,7 +70,7 @@
             this.tsmDuzenle,
             this.tsmSil});
             this.metroContextMenu1.Name = "metroContextMenu1";
-            this.metroContextMenu1.Size = new System.Drawing.Size(117, 48);
+            this.metroContextMenu1.Size = new System.Drawing.Size(181, 70);
             // 
             // tsmDuzenle
             // 
@@ -83,8 +83,9 @@
             // 
             this.tsmSil.Image = global::WFA_Kutuphane.Properties.Resources.icons8_trash_64px;
             this.tsmSil.Name = "tsmSil";
-            this.tsmSil.Size = new System.Drawing.Size(116, 22);
+            this.tsmSil.Size = new System.Drawing.Size(180, 22);
             this.tsmSil.Text = "Sil";
+            this.tsmSil.Click += new System.EventHandler(this.tsmSil_Click);
             // 
             // txtISBNNo
             // 
