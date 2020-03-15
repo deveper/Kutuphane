@@ -15,6 +15,12 @@ namespace WFA_Kutuphane
         public string BaskiSayi { get; set; } 
         public string SayfaSayi { get; set; }
         public DateTime BasimYili { get; set; }
-        public int IsbnNo { get; set; }
+        public string KitapTur { get; set; }
+        public string IsbnNo { get; set; }
+
+        public override string ToString()
+        {
+            return $"{KitapAdi}{YazarAdi}{YayinEvi}";
+        }
     }
 }

@@ -70,14 +70,15 @@
             this.tsmDuzenle,
             this.tsmSil});
             this.metroContextMenu1.Name = "metroContextMenu1";
-            this.metroContextMenu1.Size = new System.Drawing.Size(181, 70);
+            this.metroContextMenu1.Size = new System.Drawing.Size(117, 48);
             // 
             // tsmDuzenle
             // 
             this.tsmDuzenle.Image = global::WFA_Kutuphane.Properties.Resources.icons8_edit_52px;
             this.tsmDuzenle.Name = "tsmDuzenle";
-            this.tsmDuzenle.Size = new System.Drawing.Size(116, 22);
+            this.tsmDuzenle.Size = new System.Drawing.Size(180, 22);
             this.tsmDuzenle.Text = "Düzenle";
+            this.tsmDuzenle.Click += new System.EventHandler(this.tsmDuzenle_Click);
             // 
             // tsmSil
             // 
@@ -241,6 +242,7 @@
             this.btnGuncelle.UseCustomForeColor = true;
             this.btnGuncelle.UseSelectable = true;
             this.btnGuncelle.UseTileImage = true;
+            this.btnGuncelle.Click += new System.EventHandler(this.btnGuncelle_Click);
             // 
             // btnDuzenle
             // 

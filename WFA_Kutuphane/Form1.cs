@@ -50,12 +50,38 @@ namespace WFA_Kutuphane
                     GroupBox grp = (GroupBox)item;
                     Kontrol(grp.Controls);
                 }
-
             }
         }
-        void clearLst()
+        void clearLst(Control.ControlCollection ctrln)
         {
-            lstKitaplar.Items.Clear();
+            foreach (Control item in ctrln)
+            {
+                if (item is MetroTextBox)
+                {
+                    MetroTextBox txt = (MetroTextBox)item;
+                    txt.Clear();
+                }
+                else if (item is NumericUpDown)
+                {
+                    NumericUpDown nmb = (NumericUpDown)item;
+                    nmb.Value = 0;
+                }
+                else if (item is MetroDateTime)
+                {
+                    MetroDateTime dt = (MetroDateTime)item;
+                    dt.Value = DateTime.Now;
+                }
+                else if (item is MetroComboBox)
+                {
+                    MetroComboBox mc = (MetroComboBox)item;
+                    mc.SelectedItem = default;
+                }
+                else if (item is GroupBox)
+                {
+                    GroupBox gb = (GroupBox)item;
+                    clearLst(gb.Controls);
+                }
+            }
         }
 
         private void btnDuzenle_Click(object sender, EventArgs e)
@@ -67,12 +93,15 @@ namespace WFA_Kutuphane
             kutuphane.BaskiSayi = Convert.ToString(nmrBaskiSayisi.Value);
             kutuphane.SayfaSayi = Convert.ToString(nmrSayfaSayisi.Value);
             kutuphane.BasimYili = dtBasimYili.Value;
-            kutuphane.IsbnNo = int.Parse(txtISBNNo.Text);
+            kutuphane.KitapTur = cmbTur.SelectedItem.ToString();
+            kutuphane.IsbnNo = txtISBNNo.Text;
             Kontrol(this.Controls);
 
-            lstKitaplar.Items.Add(kutuphane.KitapAdi + "  " + kutuphane.YazarAdi + "  " + kutuphane.BasimYili + "  " + kutuphane.BaskiSayi);
-            MetroMessageBox.Show(this, "Yeni Kitap Eklediniz...");
-           
+            lstKitaplar.Items.Add(kutuphane);
+
+            MetroMessageBox.Show(this, "Kitap Ekledin...");
+            clearLst(this.Controls);
+
         }
 
         private void tsmSil_Click(object sender, EventArgs e)
@@ -84,7 +113,6 @@ namespace WFA_Kutuphane
             {
                 MetroMessageBox.Show(this, "Lütfen Bir Kayıt Seçiniz...");
             }
-
             else if (lstKitaplar.SelectedItems.Count > 0)
             {
 
@@ -97,6 +125,47 @@ namespace WFA_Kutuphane
 
             }
 
+        }
+        Kutuphane kutuphane;
+        int index = 0;
+        private void tsmDuzenle_Click(object sender, EventArgs e)
+        {
+            if (lstKitaplar.SelectedItems.Count <= 0)
+            {
+                MetroMessageBox.Show(this, "Lütfen Bir Kitap Seçiniz..");
+                return;
+            }
+
+            kutuphane = (Kutuphane)lstKitaplar.SelectedItem;
+            txtKitapAdi.Text = kutuphane.KitapAdi;
+            txtYazarAdi.Text = kutuphane.YazarAdi;
+            txtYayinEvi.Text = kutuphane.YayinEvi;
+            nmrBaskiSayisi.Value = Convert.ToInt32(kutuphane.BaskiSayi);
+            nmrSayfaSayisi.Value = Convert.ToInt32(kutuphane.SayfaSayi);
+            dtBasimYili.Value = kutuphane.BasimYili;
+            txtISBNNo.Text = kutuphane.IsbnNo;
+            cmbTur.SelectedItem = kutuphane.KitapTur;
+
+            index = lstKitaplar.SelectedIndex;
+
+        }
+
+        private void btnGuncelle_Click(object sender, EventArgs e)
+        {
+            int index1 = lstKitaplar.SelectedIndex;
+            kutuphane.KitapAdi = txtKitapAdi.Text;
+            kutuphane.YazarAdi = txtYazarAdi.Text;
+            kutuphane.YayinEvi = txtYayinEvi.Text;
+            kutuphane.BaskiSayi = Convert.ToString(nmrBaskiSayisi.Value);
+            kutuphane.SayfaSayi = Convert.ToString(nmrSayfaSayisi.Value);
+            kutuphane.BasimYili = dtBasimYili.Value;
+            kutuphane.KitapTur = cmbTur.SelectedItem.ToString();
+            kutuphane.IsbnNo = txtISBNNo.Text;
+            lstKitaplar.Items.RemoveAt(index1);
+            lstKitaplar.Items.Insert(index1, kutuphane);
+            kutuphane = null;
+            clearLst(this.Controls);
+            MetroMessageBox.Show(this, $"Kitabı Güncellediniz.\n{index1} Numaralı Kitabı Güncellediniz...");
         }
     }
 }

@@ -11,8 +11,16 @@
 * Kayıt ekleme sırasında, belirlenen alanlar boş geçilemez yapıldı boş alanlar için ErrorProvider kullanarak igili alanların doldurulması sağlandı.
 * Kullanıcı, kayıt eklediğinde ilgili kayıt ListBox içerisinde görünecek (Kitap Adı - Yazar Adı)
 * Kullanıcı, ListBox'a sağ tıklayarak açılan menü içerisinden kaydın silinmesini sağlayabilir. Eğer kayıt seçmeden bu işlem yapılırsa, kullanıcıya uyarı verdirildi
-* Kullanıcı, ListBox'a sağ tıklayarak açılan menü içerisindennkaydın güncellenebilmesi için, ilgili kaydı seçerek gücelleme için alanları doldurmasını sağlayınız. Eğer kayıt seçmeden bu işlem yapılırsa, kullanıcıya uyarı verdiriniz.
-* Kullanıcı, düzenle butonuna tıkladığında ilgili kaydın güncellenmiş hali, ListBox içerisinde aynı index değerinde yer almalıdır.
+* Kullanıcı, ListBox'a sağ tıklayarak açılan menü içerisinden kaydın güncellenebilmesi için, ilgili kaydı seçerek gücelleme için alanları doldurmasını sağlayabilir. Eğer kayıt seçmeden bu işlem yapılırsa, kullanıcıya uyarı verir.
+* Kullanıcı, düzenle butonuna tıkladığında ilgili kaydın güncellenmiş hali, ListBox içerisinde aynı index değerinde yer alması sağlandı.
 
-* Yapılan her işlem sonrası kullanıcıya bilgilendirme mesajı verilmelidir.
-* Ekleme ve Güncelleme işlemi sonunda ekranda yer alan kayıtların temizlenmesi gerekmektedir. Bu işlem için metot yazılacaktır.
+* Yapılan her işlem sonrası kullanıcıya bilgilendirme mesajı verir.
+* Ekleme ve Güncelleme işlemi sonunda ekranda yer alan kayıtların temizlenmesi sağlandı.
+
+## Kullanılan Yapılar
+
+* Class yapısı 
+* Generic List 
+* Recursive metod 
+* Control Sınıfı
+* Metro Framework UI
